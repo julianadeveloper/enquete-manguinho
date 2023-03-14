@@ -1,17 +1,18 @@
+import { HttpRequest } from '../protocols/http'
+import { MissingParamError } from '../errors/missing-param-error'
+// return any in http response cause error in try catch to return is undefined - type correct: HttpResponse in line 5
 export class SignUpController {
-  handle (httpRequest: any): any {
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+  handle (httpRequest: HttpRequest): any {
     if (!httpRequest.body.name) {
       return {
         statusCode: 400,
-        body: new Error('Missing param: name')
+        body: new MissingParamError('name')
       }
     }
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!httpRequest.body.email) {
       return {
         statusCode: 400,
-        body: new Error('Missing param: email')
+        body: new MissingParamError('email')
       }
     }
   }
